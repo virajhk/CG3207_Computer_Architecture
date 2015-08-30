@@ -1,0 +1,70 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 30.08.2015 15:59:40
+-- Design Name: 
+-- Module Name: cg3207_lab1_counter_test - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity cg3207_lab1_counter_test is
+--  Port ( );
+end cg3207_lab1_counter_test;
+
+architecture Behavioral of cg3207_lab1_counter_test is
+
+component cg3207_lab1_counter is
+    Port ( clk : in STD_LOGIC;
+            rst : in STD_LOGIC;
+           rAddr : out STD_LOGIC_VECTOR(3 downto 0));
+end component;
+signal clk, rst: STD_LOGIC := '0';
+signal rAddr : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+
+constant CLK_PERIOD : time := 10ns;
+
+begin
+    dut: cg3207_lab1_counter port map (clk, rst, rAddr);
+    
+    process
+        begin
+            clk <= '0'; wait for CLK_PERIOD/2;
+            clk <= '1'; wait for CLK_PERIOD/2;
+    end process;
+    
+    process
+        begin
+            rst <= '0';
+            wait for 40 ns;
+            
+            rst <= '1';
+            wait for 10 ns;
+            
+            rst <= '0';
+            wait;
+    end process;
+end Behavioral;
