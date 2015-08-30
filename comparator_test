@@ -1,0 +1,82 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 30.08.2015 16:29:43
+-- Design Name: 
+-- Module Name: cg3207_lab1_comparator_test - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity cg3207_lab1_comparator_test is
+--  Port ( );
+end cg3207_lab1_comparator_test;
+
+architecture Behavioral of cg3207_lab1_comparator_test is
+
+component cg3207_lab1_comparator is
+    Port ( rData : in STD_LOGIC_VECTOR(7 downto 0);
+           compResult : out STD_LOGIC_VECTOR (1 downto 0));
+end component;
+
+signal compResult: STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+signal rData : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+
+constant CLK_PERIOD : time := 10ns;
+
+begin
+    dut: cg3207_lab1_comparator port map (rData, compResult);
+    
+--    process
+--            begin
+--                clk <= '0'; wait for CLK_PERIOD/2;
+--                clk <= '1'; wait for CLK_PERIOD/2;
+--    end process;
+        
+    process
+            begin
+                rData <= "01000000";
+                wait for 10 ns;
+                
+                rData <= "01000001";
+                wait for 10 ns;
+                
+                rData <= "01011011";
+                wait for 10 ns;
+                
+                rData <= "01100000";
+                wait for 10 ns;
+                
+                rData <= "01100001";
+                wait for 10 ns;
+                
+                rData <= "01111010";
+                wait for 10 ns;
+                
+                rData <= "01111011";                               
+                wait;
+    end process;
+end Behavioral;
