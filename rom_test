@@ -1,0 +1,65 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 31.08.2015 09:39:44
+-- Design Name: 
+-- Module Name: cg3207_lab1_rom_test - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity cg3207_lab1_rom_test is
+--  Port ( );
+end cg3207_lab1_rom_test;
+
+architecture Behavioral of cg3207_lab1_rom_test is
+
+component cg3207_lab1_rom is
+    port ( address : in std_logic_vector(3 downto 0);
+         data : out std_logic_vector(7 downto 0));
+end component;
+
+signal data : STD_LOGIC_VECTOR (7 downto 0);
+signal address: STD_LOGIC_VECTOR (3 downto 0);
+
+begin
+    dut: cg3207_lab1_rom port map (address, data);
+    
+    process
+        begin
+            address <= "0000";
+            wait for 10 ns;
+            
+            address <= "0100";
+            wait for 10 ns;
+            
+            address <= "0001";
+            wait for 10 ns;
+            
+            address <= "1111";
+            wait;
+    end process;
+end Behavioral;
