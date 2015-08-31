@@ -1,0 +1,65 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 31.08.2015 09:35:06
+-- Design Name: 
+-- Module Name: cg3207_lab1_rom - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity cg3207_lab1_rom is
+    port ( address : in std_logic_vector(3 downto 0);
+         data : out std_logic_vector(7 downto 0));
+end cg3207_lab1_rom;
+
+architecture Behavioral of cg3207_lab1_rom is
+    type cg3207_lab1_rom is array ( 0 to 2**4 - 1) of std_logic_vector(7 downto 0);
+    constant my_ROM : cg3207_lab1_rom := (
+        0  => "00000000",  -- content "00000000" at the address location 0. - invalid value
+        1  => "01000001",   --  upper case values
+        2  => "01000010",   --  upper case values
+        3  => "01000100",   --  upper case values
+        4  => "01001111",   --  upper case values
+        5  => "01010001",   --  upper case values
+        6  => "01010100",   --  upper case values
+        7  => "01011111",   --  invalid value
+        8  => "01100001",   --  lower case values
+        9  => "01100010",   --  lower case values
+        10 => "01100101",   --  lower case values
+        11 => "01110001",   --  lower case values
+        12 => "01110010",   --  lower case values
+        13 => "01111010",   --  lower case values
+        14 => "01111001",   --  lower case values
+        15 => "11110000");   --  invalid value
+begin
+
+    data <= my_ROM(to_integer(unsigned(address)));
+    -- NOTE : reading from ROM does not require a clock, i.e., it is a combinational activity.
+    -- if it was a RAM, you would need a clock to write.
+    -- you can find templates in Project Manager>Language Templates>VHDL>Synthesis Constructs>Coding Examples
+    
+end Behavioral;
