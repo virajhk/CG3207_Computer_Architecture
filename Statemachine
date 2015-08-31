@@ -56,13 +56,20 @@ component cg3207_lab1_addsub is
            cData : out STD_LOGIC_VECTOR (7 downto 0));
 end component;
 
+component cg3207_lab1_rom is
+    port ( address : in std_logic_vector(3 downto 0);
+         data : out std_logic_vector(7 downto 0));
+end component;
+
 signal rAddress: STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
-signal romData: STD_LOGIC_VECTOR)(7 downto 0) := (others => '0');
+signal romData: STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
 signal comparatorResult: STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 signal processedop: STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 
 begin
+
 counter: cg3207_lab1_counter port map(clk => clk, rst => reset, rAddr => rAddress);
+rom: cg3207_lab1_rom port map(address => rAddress, data => romData);
 comparator: cg3207_lab1_comparator port map(rData => romData, compResult => comparatorResult);
 addsub: cg3207_lab1_addsub port map(rData => romData, control => processedop, cData => cData);
 
