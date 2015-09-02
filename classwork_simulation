@@ -1,0 +1,100 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 29.08.2015 12:44:55
+-- Design Name: 
+-- Module Name: test_counter - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity test_counter is
+--  Port ( );
+end test_counter;
+
+architecture Behavioral of test_counter is
+
+    component simple_count is
+        port ( clk : in STD_LOGIC;
+               enable : in STD_LOGIC;
+               dir : in STD_LOGIC;
+               reset : in STD_LOGIC;
+               led : out STD_LOGIC_VECTOR (3 downto 0));
+    end component;
+    
+    signal clk, enable, dir, reset : STD_LOGIC;
+    signal led : STD_LOGIC_VECTOR (3 downto 0);
+    
+    constant clk_period : time := 10ns;
+    
+begin
+
+    dut : simple_count port map (clk, enable, dir, reset, led);
+    
+    process
+        begin
+            enable <= '0';
+            dir <= '0';
+            reset <= '0';
+            wait for 20ns;
+            
+            dir <= '1';
+            wait for 40ns;
+            
+            reset <= '1';
+            wait for 10ns;
+            
+            reset <= '0';
+            wait for 20ns;
+            
+            enable <= '1';
+            wait for 40ns;
+            
+            reset <= '1';
+            wait for 10ns;
+            
+            reset <= '0';
+            wait for 30ns;
+            
+            enable <= '0';
+            dir <= '0';
+            wait for 60ns;
+            
+            reset <= '1';
+            wait for 40ns;
+            
+            reset <= '0';
+            
+            wait;
+    end process;
+    
+    process
+        begin
+            clk <= '0'; wait for clk_period/2;
+            clk <= '1'; wait for clk_period/2;
+    end process;
+
+end Behavioral;
