@@ -1,0 +1,83 @@
+----------------------------------------------------------------------------------
+ -- Company:
+ -- Engineer:
+ --
+ -- Create Date: 09/02/2015 10:40:17 AM
+ -- Design Name:
+ -- Module Name: cg3207_lab1_statemach_test - Behavioral
+ -- Project Name:
+ -- Target Devices:
+ -- Tool Versions:
+ -- Description:
+ --
+ -- Dependencies:
+ --
+ -- Revision:
+ -- Revision 0.01 - File Created
+ -- Additional Comments:
+ --
+ ----------------------------------------------------------------------------------
+
+
+ library IEEE;
+ use IEEE.STD_LOGIC_1164.ALL;
+
+ -- Uncomment the following library declaration if using
+ -- arithmetic functions with Signed or Unsigned values
+ use IEEE.NUMERIC_STD.ALL;
+
+ -- Uncomment the following library declaration if instantiating
+ -- any Xilinx leaf cells in this code.
+ --library UNISIM;
+ --use UNISIM.VComponents.all;
+
+ entity cg3207_lab1_statemach_test is
+ --  Port ( );
+ end cg3207_lab1_statemach_test;
+
+ architecture Behavioral of cg3207_lab1_statemach_test is
+
+ component cg3207_lab1_statemach is
+     Port ( clk : in STD_LOGIC;
+            op : in STD_LOGIC_VECTOR (1 downto 0);
+            reset : in STD_LOGIC;
+            cData : out STD_LOGIC_VECTOR (7 downto 0));
+ end component;
+
+ signal clk, reset: STD_LOGIC := '0';
+ signal op : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+ signal cData : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+
+ constant CLK_PERIOD : time := 10ns;
+
+ begin
+     dut: cg3207_lab1_statemach port map (clk, op, reset, cData);
+
+     process
+         begin
+             clk <= '0'; wait for CLK_PERIOD/2;
+             clk <= '1'; wait for CLK_PERIOD/2;
+     end process;
+
+     process
+         begin
+             reset <= '0';
+             op <= "01";
+             wait for 100 ns;
+
+             reset <= '1';
+             wait for 10 ns;
+             reset <= '0';
+             wait for 100 ns;
+
+             op <= "10";
+             wait for 200 ns;
+
+             op <= "00";
+             wait for 50 ns;
+
+             op <= "11";
+             wait;
+     end process;
+
+ end Behavioral;
