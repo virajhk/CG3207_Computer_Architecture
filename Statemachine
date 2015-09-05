@@ -41,6 +41,7 @@
 
  component cg3207_lab1_counter is
      Port ( clk : in STD_LOGIC;
+           op : in STD_LOGIC_VECTOR(1 downto 0); --!!!!!!!!!!New line
              rst : in STD_LOGIC;
             rAddr : out STD_LOGIC_VECTOR(3 downto 0));
  end component;
@@ -68,8 +69,8 @@
 
  begin
 
- counter: cg3207_lab1_counter port map(clk => clk, rst => reset, rAddr
- => rAddress);
+ counter: cg3207_lab1_counter port map(clk => clk, op=>op,rst => reset, rAddr
+ => rAddress); --!!!!!!!!!!New line
  rom: cg3207_lab1_rom port map(address => rAddress, data => romData);
  comparator: cg3207_lab1_comparator port map(rData => romData,
  compResult => comparatorResult);
