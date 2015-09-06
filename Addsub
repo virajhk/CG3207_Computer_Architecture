@@ -42,11 +42,15 @@ begin
     process (rData, control)
     variable result: STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
         begin
-            case control is
-                when "01" => result := std_logic_vector(unsigned(rData) + 32);
-                when "10" => result := std_logic_vector(unsigned(rData) - 32);
-                when others => result := rData;
-            end case;
+            if control = "01" then 
+                if rData >= "01000001" and rData <= "01011010" then
+                    result := std_logic_vector(unsigned(rData) + 32);
+                end if;
+            elsif control = "10" then
+                if rData >= "01100001" and rData <= "01111010" then
+                    result := std_logic_vector(unsigned(rData) - 32);
+                end if;
+            end if;
             cData <= result;
     end process;
 end Behavioral;
