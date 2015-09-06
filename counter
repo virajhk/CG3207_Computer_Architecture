@@ -33,27 +33,27 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity cg3207_lab1_counter is
     Port ( clk : in STD_LOGIC;
-            op : in STD_LOGIC_VECTOR(1 downto 0); --!!!!!!!!!!New line
+            op : in STD_LOGIC_VECTOR(1 downto 0); 
             rst : in STD_LOGIC;
            rAddr : out STD_LOGIC_VECTOR(3 downto 0));
 end cg3207_lab1_counter;
 
 architecture Behavioral of cg3207_lab1_counter is
 signal count: std_logic_vector(3 downto 0) := (others => '0');
-signal old_op : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');--!!!!!!!!!!New line
+signal op_prev : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 begin
-    process (clk,old_op) --!!!!!!!!!!New line
+    process (clk,op_prev)
         begin
             if clk'event and clk = '1' then
                 if rst = '1' then
                     count <= (others => '0');
                 else
-                    if old_op /= op then --!!!!!!!!!!New line
-                        if op = "01" or op = "10 then
+                    if op_prev /= op then
+                        if op = "01" or op = "10" then
                             count <= std_logic_vector(unsigned(count) + 1);
+                            op_prev <= op;  -- new line added by Kaushik
                         end if;
                     end if;
-                    
                 end if;
             end if;
             rAddr <= count;
