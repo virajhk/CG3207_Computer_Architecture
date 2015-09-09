@@ -39,22 +39,22 @@ end cg3207_lab1_rom;
 architecture Behavioral of cg3207_lab1_rom is
     type cg3207_lab1_rom is array ( 0 to 2**4 - 1) of std_logic_vector(7 downto 0);
     constant my_ROM : cg3207_lab1_rom := (
-        0  => "00000000",  -- content "00000000" at the address location 0. - invalid value
-        1  => "01000001",   --  upper case values
-        2  => "01000010",   --  upper case values
-        3  => "01000100",   --  upper case values
-        4  => "01001111",   --  upper case values
-        5  => "01010001",   --  upper case values
-        6  => "01010100",   --  upper case values
-        7  => "01011111",   --  invalid value
-        8  => "01100001",   --  lower case values
-        9  => "01100010",   --  lower case values
-        10 => "01100101",   --  lower case values
-        11 => "01110001",   --  lower case values
-        12 => "01110010",   --  lower case values
-        13 => "01111010",   --  lower case values
-        14 => "01111001",   --  lower case values
-        15 => "11110000");   --  invalid value
+        0  => "11111111",  -- H if converted to lower must see => 0110 1000
+        1  => "01000101",   --  E if converted: 0110 0101
+        2  => "01001100",   --  L if converted: 0110 1100
+        3  => "01001111",   --  O if converted: 0110 1111
+        4  => "01010111",   --  W if converted: 0111 0111
+        5  => "01001111",   --  O if converted: 0110 1111
+        6  => "01010010",   --  R if converted 0111 0010
+        7  => "01000100",   --  D if converted: 0110 0100
+        8  => "01100001",   --  a if converted: 0100 0001
+        9  => "01100010",   --  b if converted: 0100 0010
+        10 => "01100011",   --  c if converted: 0100 0011
+        11 => "01100100",   --  d if converted: 0100 0100
+        12 => "01100101",   --  e if converted: 0100 0101
+        13 => "01100110",   --  f if converted: 0100 0110
+        14 => "01100111",   --  g if converted: 0100 0111
+        15 => "11111111");   --  invalid value
 begin
 
     data <= my_ROM(to_integer(unsigned(address)));
