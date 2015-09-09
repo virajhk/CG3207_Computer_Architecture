@@ -39,18 +39,21 @@ end cg3207_lab1_addsub;
 
 architecture Behavioral of cg3207_lab1_addsub is
 begin
-    process (rData, control)
+    process (control)
     variable result: STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
         begin
             if control = "01" then 
                 if rData >= "01000001" and rData <= "01011010" then
                     result := std_logic_vector(unsigned(rData) + 32);
+                    cData <= result;
                 end if;
             elsif control = "10" then
                 if rData >= "01100001" and rData <= "01111010" then
                     result := std_logic_vector(unsigned(rData) - 32);
+                    cData <= result;
                 end if;
+            else
+                cData <= rData;
             end if;
-            cData <= result;
     end process;
 end Behavioral;
