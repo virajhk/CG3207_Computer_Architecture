@@ -34,7 +34,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity cg3207_lab1_counter is
     Port ( clk : in STD_LOGIC;
             op : in STD_LOGIC_VECTOR(1 downto 0); 
-            rst : in STD_LOGIC;
+            reset : in STD_LOGIC;
            rAddr : out STD_LOGIC_VECTOR(3 downto 0));
 end cg3207_lab1_counter;
 
@@ -42,10 +42,10 @@ architecture Behavioral of cg3207_lab1_counter is
 signal count: std_logic_vector(3 downto 0) := (others => '0');
 signal op_prev : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 begin
-    process (clk,op_prev)
+    process (clk) -- change this to processedop (only when processedop changes)
         begin
             if clk'event and clk = '1' then
-                if rst = '1' then
+                if reset = '1' then
                     count <= (others => '0');
                 else
                     if op_prev /= op then
